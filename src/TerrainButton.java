@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
@@ -14,9 +15,47 @@ public class TerrainButton extends JButton{
 		int r= row;
 		int c = col;
 		//question about this step
-		Dimension sizeWide = new Dimension ();
-		Dimension sizeHeight = new Dimension ();
-		terrainButton.setPreferredSize(SIZE);
+		Dimension size = new Dimension (SIZE, SIZE);
+		setPreferredSize(size);
+	}
+	public void setHole(boolean hasHole) {
+		hole = hasHole; 
+	}
+	public void increaseHoleCount() {
+		nextToHoles += 1; 
+	}
+	public boolean isNextToHoles() {
+		if (nextToHoles > 0) {
+			return true;
+		}
+		else {
+			return false; 
+		}
+	}
+	public void reveal (boolean reveal) {
+		revealed = reveal; 
+		if (revealed == true) {
+			if (hole == true) {
+			setBackground(Color.BLACK); 	
+		}
+			else {
+				setBackground(Color.CYAN); 
+			}
+			if (nextToHoles > 0) {
+				setText("" + nextToHoles);
+			}
+		} 
+		else {
+			setBackground(null);
+			setText(""); 
+		}
+	}
+	public void reset() {
+		hole = false;
+		revealed = false; 
+		nextToHoles = 0; 
+		setText(""); 
+		setBackground(null); 
 	}
 
 	public int getRow() {
