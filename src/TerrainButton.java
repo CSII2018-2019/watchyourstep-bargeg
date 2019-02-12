@@ -48,6 +48,7 @@ public class TerrainButton extends JButton{
 		else {
 			setBackground(null);
 			setText(""); 
+			setFocusPainted(false);
 		}
 	}
 	public void reset() {
