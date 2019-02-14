@@ -47,12 +47,7 @@ public class UL03MineSweeper extends JFrame {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new GridLayout(GRIDSIZE, GRIDSIZE));
 		add(centerPanel, BorderLayout.CENTER);
-		for (int r = 0; r < GRIDSIZE; r++) {
-			for (int c = 0; c < GRIDSIZE; c++) {
-				terrain[r][c] = new TerrainButton(r,c);
-				centerPanel.add(terrain[r][c]);
-			}
-		}
+		
 		for (int r = 0; r < GRIDSIZE; r++) {
 			for (int c = 0; c < GRIDSIZE; c++) {
 				terrain[r][c] = new TerrainButton(r,c);
@@ -77,7 +72,7 @@ public class UL03MineSweeper extends JFrame {
 		} else {
 		check(row, col); 
 		checkNeighbors(row, col); 
-		if (GRIDSIZE * GRIDSIZE - totalRevealed ==0) { 
+		if (GRIDSIZE * GRIDSIZE - totalRevealed == NUMBEROFHOLES) { 
 			String message = "You win! Do you want to play again?";
 			promptForNewGame(message); 	
 		}
@@ -136,7 +131,7 @@ public class UL03MineSweeper extends JFrame {
 	}
 	private void showHoles() {
 		for (int row = 0; row <GRIDSIZE; row++){
-			for ( int col = 0; row <GRIDSIZE; col++  ) {
+			for ( int col = 0; col <GRIDSIZE; col++  ) {
 				if (terrain[row][col].hasHole()) {
 					terrain[row][col].reveal(true);
 				}
@@ -144,7 +139,10 @@ public class UL03MineSweeper extends JFrame {
 		}
 	}
 	private void newGame() {
-		//CONFUSED,HELP 
+		for (int row = 0; row <GRIDSIZE; row++){
+			for ( int col = 0; col <GRIDSIZE; col++  ) {
+				terrain[row][col].reset(); 
+			} }
 		setHoles(); 
 		totalRevealed = 0; 
 	}
